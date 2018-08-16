@@ -38,7 +38,30 @@ if (!defined("WHMCS"))
 			//Fechando Jquery das mascaras
 			$javascript .= ' });</script>';
 			//CPF CNPj mesmo campo
-			$javascript .= '<script>jQuery(function($){$("#customfield'.$cpfcampo.'").focus(function(){$(this).unmask();$(this).val($(this).val().replace(/\D/g,""));}).click(function(){$(this).val($(this).val().replace(/\D/g,"")).unmask();}).blur(function(){if($(this).val().length==11){$(this).mask("999.999.999-99");}else if($(this).val().length==14){$(this).mask("99.999.999/9999-99");}});});</script>';
+			//$javascript .= '<script>jQuery(function($){$("#customfield'.$cpfcampo.'").focus(function(){$(this).unmask();$(this).val($(this).val().replace(/\D/g,""));}).click(function(){$(this).val($(this).val().replace(/\D/g,"")).unmask();}).blur(function(){if($(this).val().length==11){$(this).mask("999.999.999-99");}else if($(this).val().length==14){$(this).mask("99.999.999/9999-99");}});});</script>';
+			$javascript .= 
+			'
+			<script type="text/javascript">
+
+
+    		window.onload=function(){
+				// Mascara de CPF e CNPJ
+				var CpfCnpjMaskBehavior = function (val) {
+							return val.replace(/\D/g, \'\').length <= 11 ? \'000.000.000-009\' : \'00.000.000/0000-00\';
+						},
+					cpfCnpjpOptions = {
+						onKeyPress: function(val, e, field, options) {
+						field.mask(CpfCnpjMaskBehavior.apply({}, arguments), options);
+					  }
+					};
+
+				$(function() {
+					$(\':input[id=customfield'.$cpfcampo.']\').mask(CpfCnpjMaskBehavior, cpfCnpjpOptions);
+				})
+			}
+
+			</script>
+			';
 		}
 		else{
 			//Chamando as mascaras

@@ -5,6 +5,7 @@ $_ADDONLANG['cancelar'] = "Cancelar";
 $_ADDONLANG['cpf'] = "CPF";
 $_ADDONLANG['nascimento'] = "Data de Nascimento";
 $_ADDONLANG['cnpj'] = "CNPJ";
+$_ADDONLANG['celular'] = "Celular";
 $_ADDONLANG['verificar'] = "Verificar";
 $_ADDONLANG['atualizacao'] = "Atualizações";
 $_ADDONLANG['sucatualizacao'] = "Parabéns sua versão esta atualizada!";

@@ -6,7 +6,7 @@ function maskara_config() {
 	$configarray = array(
 		'name' => 'Maskara',
 		'description' => 'Módulo Maskara para WHMCS.',
-		'version' => '0.2',
+		'version' => '0.3',
 		'language' => 'portuguese-br',
 		'author' => 'Daniel Costa - DC WEBSOLUTIONS',
 		);
@@ -25,6 +25,7 @@ function maskara_activate($vars) {
 			$table->string('cpf');
 			$table->string('data_nascimento');
 			$table->string('cnpj');
+			$table->string('celular');
 		}
 		);
 
@@ -33,7 +34,7 @@ function maskara_activate($vars) {
 		function ($connectionManager)
 		{
 			/** @var \Illuminate\Database\Connection $connectionManager */
-			$connectionManager->table('mod_maskara')->insert(['cpf' => 'nulo','data_nascimento' => 'nulo','cnpj' => 'nulo']);
+			$connectionManager->table('mod_maskara')->insert(['cpf' => 'nulo','data_nascimento' => 'nulo','cnpj' => 'nulo','celular' => 'nulo']);
 		}
 		);
 
@@ -62,7 +63,7 @@ function maskara_output($vars) {
 	//Salvando informações de configuração
 	if($_GET['config']=='salvar'){
 		try{
-			$updatedUserCount = Capsule::table('mod_maskara')->update(['cpf' => $_POST['cpf'],'data_nascimento' => $_POST['data-nascimento'],'cnpj' => $_POST['cnpj'],]);
+			$updatedUserCount = Capsule::table('mod_maskara')->update(['cpf' => $_POST['cpf'],'data_nascimento' => $_POST['data-nascimento'],'cnpj' => $_POST['cnpj'],'celular' => $_POST['celular'],]);
 		    //Sucesso em salvar
 			echo '<div class="alert alert-success"><strong>Alerta:</strong> Suas informações foram salvas com sucesso.</div>';
 		}
@@ -78,6 +79,7 @@ function maskara_output($vars) {
 		$cpfcampo = $mask->cpf;
 		$nascimentocampo = $mask->data_nascimento;
 		$cnpjcampo = $mask->cnpj;
+		$celular = $mask->celular;
 
 	}
 
@@ -183,6 +185,32 @@ function maskara_output($vars) {
 
 									//imprime os resultados
 									echo $cnpj_campo;
+									?>
+								</select>
+							</div>
+						</div>
+						<!--CELULAR Campo Customizado-->
+						<div class="panel panel-primary">
+							<div class="panel-heading"><?=$LANG['selecione-campo'];?> <b><?=$LANG["celular"];?></b></div>
+							<div class="panel-body">
+								<select name="celular" id="celular" class="form-control">
+									<?php
+									$celular_campo = '';
+			    					//Pegando informações da tabela do módulo.
+									/** @var stdClass $customfields */
+									foreach (Capsule::table('tblcustomfields')->get() as $customfields) {
+										$idfields = $customfields->id;
+										$namefields = $customfields->fieldname;
+										if($idfields==$cnpjcampo){
+											$celular_campo .= '<option value="'.$idfields.'" selected="selected">'.$namefields.'</option>';
+										}
+										else{
+											$celular_campo .= '<option value="'.$idfields.'">'.$namefields.'</option>';
+										}
+									}
+
+									//imprime os resultados
+									echo $celular_campo;
 									?>
 								</select>
 							</div>

@@ -18,6 +18,7 @@ if (!defined("WHMCS"))
 		    $cpfcampo = $mask->cpf;
 		    $nascimentocampo = $mask->data_nascimento;
 		    $cnpjcampo = $mask->cnpj;
+			$celular = $mask->celular;
 		}
 		//Criando o Javascript
 		$javascript  = '';
@@ -29,6 +30,8 @@ if (!defined("WHMCS"))
 			$javascript .= '<script type="text/javascript">jQuery(function($){ ';
 			//Data de Nascimento
 			$javascript .= '$("#customfield'.$nascimentocampo.'").mask("99/99/9999", {placeholder: "dd/mm/aaaa"}); ';
+			//Celular
+			$javascript .= '$("#customfield'.$celular.'").mask("(99) 9999-99999"); ';
 			//Telefone
 			$javascript .= '$("#phonenumber").mask("(99) 9999-99999"); ';
 			$javascript .= '$("#inputPhone").mask("(99) 9999-99999"); ';
@@ -70,6 +73,8 @@ if (!defined("WHMCS"))
 			$javascript .= '$("#customfield'.$cpfcampo.'").mask("999.999.999-99"); ';
 			//CNPJ
 			$javascript .= '$("#customfield'.$cnpjcampo.'").mask("99.999.999/9999-99"); ';
+			//Celular
+			$javascript .= '$("#customfield'.$celular.'").mask("(99) 9999-99999"); ';
 			//Data de Nascimento
 			$javascript .= '$("#customfield'.$nascimentocampo.'").mask("99/99/9999", {placeholder: "dd/mm/aaaa"}); ';
 			//Telefone

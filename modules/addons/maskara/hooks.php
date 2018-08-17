@@ -27,26 +27,24 @@ if (!defined("WHMCS"))
 		//Verifica se o campo é o mesmo do CPF X CNPJ
 		if($cpfcampo==$cnpjcampo){
 			//Chamando as mascaras
-			$javascript .= '<script type="text/javascript">jQuery(function($){ ';
+			$javascript .= '<script type="text/javascript">jQuery(function($){ ';			
 			//Data de Nascimento
 			$javascript .= '$("#customfield'.$nascimentocampo.'").mask("99/99/9999", {placeholder: "dd/mm/aaaa"}); ';
 			//Celular
-			$javascript .= '$("#customfield'.$celular.'").mask("(99) 9999-99999"); ';
+			$javascript .= 'var maskBehavior=function(a){return 11===a.replace(/\D/g,"").length?"(00) 00000-0000":"(00) 0000-00009"},options={onKeyPress:function(a,o,e,n){e.mask(maskBehavior.apply({},arguments),n)}};$(".phone").mask(maskBehavior,options);';
+			$javascript .= '$("#customfield'.$celular.'").mask(maskBehavior, options);';
 			//Telefone
-			$javascript .= '$("#phonenumber").mask("(99) 9999-99999"); ';
-			$javascript .= '$("#inputPhone").mask("(99) 9999-99999"); ';
+			$javascript .= '$("#phonenumber").mask(maskBehavior, options);';
+			$javascript .= '$("#inputPhone").mask(maskBehavior, options);';
 			//CEP
 			$javascript .= '$("#postcode").mask("99999-999"); ';
 			$javascript .= '$("#inputPostcode").mask("99999-999"); ';
 			//Fechando Jquery das mascaras
 			$javascript .= ' });</script>';
-			//CPF CNPj mesmo campo
-			//$javascript .= '<script>jQuery(function($){$("#customfield'.$cpfcampo.'").focus(function(){$(this).unmask();$(this).val($(this).val().replace(/\D/g,""));}).click(function(){$(this).val($(this).val().replace(/\D/g,"")).unmask();}).blur(function(){if($(this).val().length==11){$(this).mask("999.999.999-99");}else if($(this).val().length==14){$(this).mask("99.999.999/9999-99");}});});</script>';
+			//CPF CNPj mesmo campo			
 			$javascript .= 
 			'
 			<script type="text/javascript">
-
-
     		window.onload=function(){
 				// Mascara de CPF e CNPJ
 				var CpfCnpjMaskBehavior = function (val) {
@@ -57,12 +55,10 @@ if (!defined("WHMCS"))
 						field.mask(CpfCnpjMaskBehavior.apply({}, arguments), options);
 					  }
 					};
-
 				$(function() {
 					$(\':input[id=customfield'.$cpfcampo.']\').mask(CpfCnpjMaskBehavior, cpfCnpjpOptions);
 				})
 			}
-
 			</script>
 			';
 		}
@@ -74,12 +70,13 @@ if (!defined("WHMCS"))
 			//CNPJ
 			$javascript .= '$("#customfield'.$cnpjcampo.'").mask("99.999.999/9999-99"); ';
 			//Celular
-			$javascript .= '$("#customfield'.$celular.'").mask("(99) 9999-99999"); ';
+			$javascript .= 'var maskBehavior=function(a){return 11===a.replace(/\D/g,"").length?"(00) 00000-0000":"(00) 0000-00009"},options={onKeyPress:function(a,o,e,n){e.mask(maskBehavior.apply({},arguments),n)}};$(".phone").mask(maskBehavior,options);';
+			$javascript .= '$("#customfield'.$celular.'").mask(maskBehavior, options);';
 			//Data de Nascimento
 			$javascript .= '$("#customfield'.$nascimentocampo.'").mask("99/99/9999", {placeholder: "dd/mm/aaaa"}); ';
 			//Telefone
-			$javascript .= '$("#phonenumber").mask("(99) 9999-99999"); ';
-			$javascript .= '$("#inputPhone").mask("(99) 9999-99999"); ';
+			$javascript .= '$("#phonenumber").mask(maskBehavior, options);';
+			$javascript .= '$("#inputPhone").mask(maskBehavior, options);';
 			//CEP
 			$javascript .= '$("#postcode").mask("99999-999"); ';
 			$javascript .= '$("#inputPostcode").mask("99999-999"); ';

@@ -8,7 +8,7 @@ function maskara_config() {
 		'description' => 'Módulo Maskara para WHMCS.',
 		'version' => '0.3',
 		'language' => 'portuguese-br',
-		'author' => 'Daniel Costa - DC WEBSOLUTIONS',
+		'author' => 'Daniel Costa',
 		);
 	return $configarray;
 }
@@ -93,7 +93,7 @@ function maskara_output($vars) {
 			<div class="panel-heading"><i class="fa fa fa-id-card-o" aria-hidden="true"></i> <?=$LANG['sobre'];?></div>
 			<div class="panel-body">
 				<p><strong><center>Módulo Maskara para WHMCS.</center></strong><br/>
-					<strong>Criador:</strong> Daniel Costa - DC WEBSOLUTIONS<br/>
+					<strong>Criador:</strong> Daniel Costa<br/>
 					<strong>Versão:</strong> <?php
 					$versao = $vars['version'];
 					$versaodisponivel = file_get_contents("http://lab.dcwebsolutions.com.br/versao-modulos/maskara.txt");

@@ -23,7 +23,7 @@ if (!defined("WHMCS"))
 		//Criando o Javascript
 		$javascript  = '';
 		//Chamando o Jquery da Mascara
-		$javascript .= '<script type="text/javascript" src="'.$urlsistema.'/modules/addons/maskara/jquery.maskedinput.min.js"></script><script src="'.$urlsistema.'/modules/addons/maskara/cep.js"></script>';
+		$javascript .= '<script type="text/javascript" src="'.$urlsistema.'/modules/addons/maskara/jquery.maskedinput.min.js"></script>';
 		//Verifica se o campo é o mesmo do CPF X CNPJ
 		if($cpfcampo==$cnpjcampo){
 			//Chamando as mascaras
@@ -33,11 +33,9 @@ if (!defined("WHMCS"))
 			//Celular
 			$javascript .= 'var maskBehavior=function(a){return 11===a.replace(/\D/g,"").length?"(00) 00000-0000":"(00) 0000-00009"},options={onKeyPress:function(a,o,e,n){e.mask(maskBehavior.apply({},arguments),n)}};$(".phone").mask(maskBehavior,options);';
 			$javascript .= '$("#customfield'.$celular.'").mask(maskBehavior, options);';
-			//Telefone
-			$javascript .= '$("#phonenumber").mask(maskBehavior, options);';
+			//Telefone			
 			$javascript .= '$("#inputPhone").mask(maskBehavior, options);';
-			//CEP
-			$javascript .= '$("#postcode").mask("99999-999"); ';
+			//CEP			
 			$javascript .= '$("#inputPostcode").mask("99999-999"); ';
 			//Fechando Jquery das mascaras
 			$javascript .= ' });</script>';
@@ -75,10 +73,8 @@ if (!defined("WHMCS"))
 			//Data de Nascimento
 			$javascript .= '$("#customfield'.$nascimentocampo.'").mask("99/99/9999", {placeholder: "dd/mm/aaaa"}); ';
 			//Telefone
-			$javascript .= '$("#phonenumber").mask(maskBehavior, options);';
 			$javascript .= '$("#inputPhone").mask(maskBehavior, options);';
-			//CEP
-			$javascript .= '$("#postcode").mask("99999-999"); ';
+			//CEP			
 			$javascript .= '$("#inputPostcode").mask("99999-999"); ';
 			//Fechando Jquery das mascaras
 			$javascript .= ' });</script>';
